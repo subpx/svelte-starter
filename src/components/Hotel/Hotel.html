@@ -1,0 +1,38 @@
+<div class="card">
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <div class="h2"><span class="badge badge-warning">{{ hotel.GdsProvider }}</span></div>
+                </div>
+                <div class="col-sm">
+                    <h4 class="card-title">{{ hotel.HotelName }}</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ displayDate(hotel.DateFrom) }}</h6>
+                </div>
+                <div class="col-sm">
+                    <small>Tax: {{ hotel.TaxAmount }}</small><br />
+                    <strong>Total: {{ hotel.TotalAmount }}</strong>
+                </div>
+                <div class="col-sm">
+                    <label class="badge badge-success">{{ hotel.Status }}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+  import { displayDate } from '../../helpers/date';
+
+  export default {
+    data() {
+      return {
+        hotel: null
+      };
+    },
+    helpers: {
+      displayDate
+    }
+  };
+</script>

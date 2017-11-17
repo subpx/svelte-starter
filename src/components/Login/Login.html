@@ -1,0 +1,110 @@
+<div class="container">
+    <form class="form-signin" on:submit="submit(event)">
+        <h2 class="form-signin-heading">Please sign in</h2>
+
+        <input type="email"
+               class="form-control"
+               placeholder="Email address"
+               bind:value="credentials.username"
+               required
+               autofocus>
+
+        <input type="password"
+               class="form-control"
+               placeholder="Password"
+               bind:value="credentials.password"
+               required>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+
+        {{#if isLoading}}
+            <button class="btn btn-lg btn-primary btn-block"
+                    disabled
+                    type="button">
+                <i class='fa fa-circle-o-notch fa-spin'></i>
+            </button>
+        {{else}}
+            <button class="btn btn-lg btn-primary btn-block" type="submit">
+                Sign in
+            </button>
+        {{/if}}
+    </form>
+</div>
+
+<script>
+    import auth from '../../services/auth';
+    import { router } from '../../services/router';
+
+   export default {
+      data() {
+        return {
+          isLoading: false,
+          credentials: {
+            username: '',
+            password: ''
+          }
+        };
+      },
+     methods: {
+        submit: function (event) {
+          event.preventDefault();
+          this.set({isLoading:true});
+
+          auth.authenticate(this.get('credentials'))
+            .then(function(response) {
+              if(response.status !== 200) {
+                alert('there was an error');
+                return;
+              }
+
+              response.json().then(function(data) {
+                auth.setToken(data.access_token);
+                router.go('dashboard');
+              });
+
+            }).catch(function(err) {
+                console.log('Fetch Error :-S', err);
+            });
+        }
+     }
+    };
+</script>
+
+<style>
+    .form-signin {
+        max-width: 330px;
+        padding: 15px;
+        margin: 0 auto;
+    }
+    .form-signin .form-signin-heading,
+    .form-signin .checkbox {
+        margin-bottom: 10px;
+    }
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+</style>

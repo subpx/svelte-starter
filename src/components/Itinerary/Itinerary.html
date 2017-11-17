@@ -1,0 +1,128 @@
+{{#if itinerary }}
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h2>Booking Summary <small class="text-muted">#{{ itinerary.Reference }}</small></h2>
+            <p>Pack your bags you are leaving on {{ displayDate(itinerary.Flights[0].Departure.Date) }}</p>
+            <p><span class="badge badge-pill badge-danger">{{ itinerary.ApprovalState }}</span></p>
+
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Flights <span class="badge badge-primary badge-pill">{{ itinerary.Flights.length }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Rail <span class="badge badge-primary badge-pill">{{ itinerary.Rails.length }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Hotels <span class="badge badge-primary badge-pill">{{ itinerary.Hotels.length }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Cars <span class="badge badge-primary badge-pill">{{ itinerary.Cars.length }}</span>
+                </li>
+            </ul>
+
+        </div>
+    </section>
+
+    <section>
+        <h3>{{ itinerary.Firstname }} {{ itinerary.Lastname }}</h3>
+    </section>
+
+    {{#if itinerary.Flights.length }}
+    <section>
+        <p class="lead text-muted">Flights</p>
+
+        {{#each itinerary.Flights as flight}}
+            <Flight flight="{{flight}}"></Flight>
+        {{/each}}
+    </section>
+    {{/if}}
+
+    {{#if itinerary.Hotels.length }}
+    <section>
+        <p class="lead text-muted">Hotels</p>
+
+        {{#each itinerary.Hotels as hotel}}
+            <Hotel hotel="{{hotel}}"></Hotel>
+        {{/each}}
+    </section>
+    {{/if}}
+
+    {{#if itinerary.Cars.length }}
+    <section>
+        <p class="lead text-muted">Cars</p>
+
+        {{#each itinerary.Cars as car}}
+            <Car car="{{car}}"></Car>
+        {{/each}}
+    </section>
+    {{/if}}
+
+{{/if}}
+
+{{ #if !itinerary }}
+    <i class='fa fa-circle-o-notch fa-5x fa-spin'></i>
+{{/if}}
+
+<script>
+    import { displayDate } from '../../helpers/date';
+    import Flight from '../Flight/Flight.html';
+    import Hotel from '../Hotel/Hotel.html';
+    import Car from '../Car/Car.html';
+
+  export default {
+    data() {
+      return {
+        itinerary: null
+      };
+    },
+    helpers: {
+      displayDate
+    },
+    components: {
+      Flight,
+      Hotel,
+      Car
+    }
+  };
+</script>
+
+<style>
+    .jumbotron {
+        background: #fff;
+        margin-top: 6rem;
+        margin-bottom: 4rem;
+    }
+
+    section {
+        margin-bottom: 2rem;
+    }
+
+    section:last-child {
+        margin-bottom: 0;
+    }
+
+    .list-group {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .list-group-item {
+        border-right: none;
+        margin: 0;
+    }
+
+    .list-group-item:first-child {
+        border-radius: .25rem 0 0 .25rem;
+    }
+
+    .list-group-item:last-child {
+        border-radius: 0 .25rem .25rem 0;
+        border-right: 1px solid rgba(0,0,0,.125);
+    }
+
+    .list-group-item .badge {
+        vertical-align: middle;
+        margin-left: 3px;
+    }
+</style>

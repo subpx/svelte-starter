@@ -1,0 +1,92 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a href="" class="navbar-brand"><i class="fa fa-bolt fa-3" aria-hidden="true"></i> Svelte Lightning</a>
+
+    <button class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarCollapse"
+            aria-controls="navbarCollapse"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item {{ asr.stateIsActive('dashboard') ? 'active' : '' }}">
+                <a href="{{ asr.makePath('dashboard') }}">
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item {{ asr.stateIsActive('dashboard.nested') ? 'active' : '' }}">
+                <a href="{{ asr.makePath('dashboard.nested') }}">
+                    Nested nothing
+                </a>
+            </li>
+            <li class="nav-item {{ asr.stateIsActive('login') ? 'active' : '' }}">
+                <a href="{{ asr.makePath('login') }}">
+                    Logout
+                </a>
+            </li>
+        </ul>
+
+        <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<section role="main" class="container dashboardContainer">
+    <uiView></uiView>
+    <div id="itinerary"></div>
+</section>
+
+<script>
+  import auth from '../../services/auth';
+  import itineraryService from '../../services/itinerary';
+  import Itinerary from '../Itinerary/Itinerary.html';
+
+  export default {
+    oncreate () {
+      itineraryService.getItinerary()
+        .then(function(response) {
+          if(response.status !== 200) {
+            alert('there was an error');
+            return;
+          }
+
+          response.json().then(function(data) {
+            const itinerary = new Itinerary({
+              target: document.querySelector('#itinerary')
+            });
+
+            itinerary.set({ itinerary: data });
+          });
+
+        }).catch(function(err) {
+        console.log('Fetch Error :-S', err);
+      });
+    },
+    components: {
+      Itinerary
+    }
+  };
+</script>
+
+<style>
+    .dashboardContainer {
+        margin-top: 60px;
+    }
+
+    .nav-item a {
+        color: rgba(255,255,255,.5);
+        display: block;
+        padding: .5em 1em;
+    }
+
+    .nav-item.active a {
+        color: #fff;
+    }
+</style>

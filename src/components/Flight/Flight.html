@@ -1,0 +1,38 @@
+<div class="card">
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <img src="{{ flight.CarrierImage }}" width="100">
+                </div>
+                <div class="col-sm">
+                    <h4 class="card-title">{{ flight.Carrier }}{{ flight.FlightNumber }}</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ displayDate(flight.Departure.Date) }}</h6>
+                </div>
+                <div class="col-sm">
+                    <small>Tax: {{ flight.TaxAmount }}</small><br />
+                    <strong>Total: {{ flight.TotalAmount }}</strong>
+                </div>
+                <div class="col-sm">
+                    <label class="badge badge-success">{{ flight.Status }}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+  import { displayDate } from '../../helpers/date';
+
+  export default {
+    data() {
+      return {
+        flight: null
+      };
+    },
+    helpers: {
+      displayDate
+    }
+  };
+</script>
