@@ -40,7 +40,13 @@
 
 <section role="main" class="container dashboardContainer">
     <uiView></uiView>
-    <div id="itinerary"></div>
+
+    {{ #if !itinerary }}
+        <i class='fa fa-circle-o-notch fa-2x fa-spin loading'></i>
+    {{/if}}
+    {{ #if itinerary }}
+        <Itinerary itinerary="{{itinerary}}"></Itinerary>
+    {{/if}}
 </section>
 
 <script>
@@ -51,18 +57,14 @@
   export default {
     oncreate () {
       itineraryService.getItinerary()
-        .then(function(response) {
+        .then((response) => {
           if(response.status !== 200) {
             alert('there was an error');
             return;
           }
 
-          response.json().then(function(data) {
-            const itinerary = new Itinerary({
-              target: document.querySelector('#itinerary')
-            });
-
-            itinerary.set({ itinerary: data });
+          response.json().then((itinerary) => {
+            this.set({ itinerary: itinerary });
           });
 
         }).catch(function(err) {
@@ -88,5 +90,11 @@
 
     .nav-item.active a {
         color: #fff;
+    }
+
+    .loading {
+        display: block;
+        text-align: center;
+        margin: 100px auto 0 auto;
     }
 </style>

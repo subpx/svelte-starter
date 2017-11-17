@@ -1,67 +1,62 @@
-{{#if itinerary }}
-    <section class="jumbotron text-center">
-        <div class="container">
-            <h2>Booking Summary <small class="text-muted">#{{ itinerary.Reference }}</small></h2>
-            <p>Pack your bags you are leaving on {{ displayDate(itinerary.Flights[0].Departure.Date) }}</p>
-            <p><span class="badge badge-pill badge-danger">{{ itinerary.ApprovalState }}</span></p>
 
-            <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Flights <span class="badge badge-primary badge-pill">{{ itinerary.Flights.length }}</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Rail <span class="badge badge-primary badge-pill">{{ itinerary.Rails.length }}</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Hotels <span class="badge badge-primary badge-pill">{{ itinerary.Hotels.length }}</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Cars <span class="badge badge-primary badge-pill">{{ itinerary.Cars.length }}</span>
-                </li>
-            </ul>
+<section class="jumbotron text-center">
+    <div class="container">
+        <h2>Booking Summary <small class="text-muted">#{{ itinerary.Reference }}</small></h2>
+        <p>Pack your bags you are leaving on {{ displayDate(itinerary.Flights[0].Departure.Date) }}</p>
+        <p><span class="badge badge-pill badge-danger">{{ itinerary.ApprovalState }}</span></p>
 
-        </div>
-    </section>
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Flights <span class="badge badge-primary badge-pill">{{ itinerary.Flights.length }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Rail <span class="badge badge-primary badge-pill">{{ itinerary.Rails.length }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Hotels <span class="badge badge-primary badge-pill">{{ itinerary.Hotels.length }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Cars <span class="badge badge-primary badge-pill">{{ itinerary.Cars.length }}</span>
+            </li>
+        </ul>
 
-    <section>
-        <h3>{{ itinerary.Firstname }} {{ itinerary.Lastname }}</h3>
-    </section>
+    </div>
+</section>
 
-    {{#if itinerary.Flights.length }}
-    <section>
-        <p class="lead text-muted">Flights</p>
+<section>
+    <h3>{{ itinerary.Firstname }} {{ itinerary.Lastname }}</h3>
+</section>
 
-        {{#each itinerary.Flights as flight}}
-            <Flight flight="{{flight}}"></Flight>
-        {{/each}}
-    </section>
-    {{/if}}
+{{#if itinerary.Flights.length }}
+<section>
+    <p class="lead text-muted">Flights</p>
 
-    {{#if itinerary.Hotels.length }}
-    <section>
-        <p class="lead text-muted">Hotels</p>
-
-        {{#each itinerary.Hotels as hotel}}
-            <Hotel hotel="{{hotel}}"></Hotel>
-        {{/each}}
-    </section>
-    {{/if}}
-
-    {{#if itinerary.Cars.length }}
-    <section>
-        <p class="lead text-muted">Cars</p>
-
-        {{#each itinerary.Cars as car}}
-            <Car car="{{car}}"></Car>
-        {{/each}}
-    </section>
-    {{/if}}
-
+    {{#each itinerary.Flights as flight}}
+        <Flight flight="{{flight}}"></Flight>
+    {{/each}}
+</section>
 {{/if}}
 
-{{ #if !itinerary }}
-    <i class='fa fa-circle-o-notch fa-5x fa-spin'></i>
+{{#if itinerary.Hotels.length }}
+<section>
+    <p class="lead text-muted">Hotels</p>
+
+    {{#each itinerary.Hotels as hotel}}
+        <Hotel hotel="{{hotel}}"></Hotel>
+    {{/each}}
+</section>
 {{/if}}
+
+{{#if itinerary.Cars.length }}
+<section>
+    <p class="lead text-muted">Cars</p>
+
+    {{#each itinerary.Cars as car}}
+        <Car car="{{car}}"></Car>
+    {{/each}}
+</section>
+{{/if}}
+
 
 <script>
     import { displayDate } from '../../helpers/date';
