@@ -1,6 +1,6 @@
 <div class="container">
     <form class="form-signin" on:submit="submit(event)">
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading">Sign in like its {{testDate}}</h2>
 
         <input type="email"
                class="form-control"
@@ -15,12 +15,14 @@
                bind:value="credentials.password"
                required>
 
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
+        <input type="text"
+               id="flatpickr"
+               class="form-control margin-bottom-10"
+               bind:value="testDate"
+               placeholder="Select a date for no reason at all"
+               required>
 
+        <div class="form-buttons">
         {{#if isLoading}}
             <button class="btn btn-lg btn-primary btn-block"
                     disabled
@@ -32,16 +34,26 @@
                 Sign in
             </button>
         {{/if}}
+        </div>
     </form>
 </div>
 
 <script>
     import auth from '../../services/auth';
     import router from '../../services/router';
+    import flatpickr from 'flatpickr';
+    import styles from 'flatpickr/dist/flatpickr.css';
 
    export default {
+     oncreate() {
+       console.log(flatpickr);
+       this.datePicker = flatpickr("#flatpickr", {
+         dateFormat: 'Y'
+       });
+     },
       data() {
         return {
+          testDate: '1999',
           isLoading: false,
           credentials: {
             username: '',
@@ -106,5 +118,8 @@
         margin-bottom: 10px;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
+    }
+    .form-buttons {
+        margin-top: 20px;
     }
 </style>

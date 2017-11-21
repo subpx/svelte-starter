@@ -44,6 +44,10 @@ module.exports = {
         test: /\.html$/,
         exclude: /node_modules/,
         use: 'svelte-loader'
+      },
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
       }
     ]
   },

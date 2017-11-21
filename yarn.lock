@@ -1072,6 +1072,10 @@ deep-extend@~0.4.0:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/deep-extend/-/deep-extend-0.4.2.tgz#48b699c27e334bf89f10892be432f6e4c7d34a7f"
 
+deepmerge@1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-1.3.1.tgz#682ba92402574115b865edce525665814296a39b"
+
 define-properties@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/define-properties/-/define-properties-1.1.2.tgz#83a73f2fea569898fb737193c8f873caf6d45c94"
@@ -1506,6 +1510,10 @@ find-up@^2.0.0, find-up@^2.1.0:
   resolved "https://registry.yarnpkg.com/find-up/-/find-up-2.1.0.tgz#45d1b7e506c717ddd482775a2b77920a3c0c57a7"
   dependencies:
     locate-path "^2.0.0"
+
+flatpickr@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.1.2.tgz#2bbebe46e1fd74d7ef10bf987229aa23eaac1265"
 
 for-in@^1.0.1:
   version "1.0.2"
@@ -3510,6 +3518,12 @@ svelte-loader@^2.0.1:
   resolved "https://registry.yarnpkg.com/svelte-loader/-/svelte-loader-2.1.0.tgz#0164f58c659424d16828a44df084ec1d436f680b"
   dependencies:
     loader-utils "^1.1.0"
+
+svelte-state-renderer@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/svelte-state-renderer/-/svelte-state-renderer-1.2.5.tgz#dc489c5d06813854d526b6025c60cc4834a9cac8"
+  dependencies:
+    deepmerge "1.3.1"
 
 svelte@^1.20.2, svelte@^1.24.0:
   version "1.41.2"
