@@ -42,13 +42,14 @@
     import auth from '../../services/auth';
     import router from '../../services/router';
     import flatpickr from 'flatpickr';
-    import styles from 'flatpickr/dist/flatpickr.css';
+    import styles from 'flatpickr/dist/themes/airbnb.css';
 
    export default {
      oncreate() {
        console.log(flatpickr);
        this.datePicker = flatpickr("#flatpickr", {
-         dateFormat: 'Y'
+         dateFormat: 'Y',
+         mode: 'range'
        });
      },
       data() {
