@@ -2,6 +2,7 @@ import stateRouter from './services/router';
 import auth from './services/auth';
 import Dashboard from './components/Dashboard/Dashboard.html';
 import Login from './components/Login/Login.html';
+import Contact from './components/Contact/Contact.html';
 import Nothing from './components/Dashboard/Nothing.html';
 
 stateRouter.addState({
@@ -12,6 +13,12 @@ stateRouter.addState({
     auth.clear();
     callback();
   },
+});
+
+stateRouter.addState({
+  name: 'contact',
+  route: '/contact',
+  template: Contact
 });
 
 stateRouter.addState({
