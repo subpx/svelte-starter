@@ -34,6 +34,10 @@
                 Sign in
             </button>
         {{/if}}
+
+            <button class="btn btn-lg btn-link btn-block" type="button" on:click="oauth(event)">
+                <i class="fa fa-github"></i> Use my Github account
+            </button>
         </div>
     </form>
 </div>
@@ -46,7 +50,6 @@
 
    export default {
      oncreate() {
-       console.log(flatpickr);
        this.datePicker = flatpickr("#flatpickr", {
          dateFormat: 'Y',
          mode: 'range'
@@ -82,7 +85,11 @@
             }).catch(function(err) {
                 console.log('Fetch Error :-S', err);
             });
-        }
+        },
+       oauth: function(event) {
+         event.preventDefault();
+         auth.oauth();
+       }
      }
     };
 </script>

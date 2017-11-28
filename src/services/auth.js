@@ -12,6 +12,21 @@ function setToken(token) {
   return localStorage.setItem('access_token', token);
 }
 
+function oauth() {
+  const authenticator = new netlify.default ({});
+
+  authenticator.authenticate({
+    provider: 'github',
+    scope: 'user'
+  }, function(err, data) {
+    if (err) {
+      console.log(err);
+    }
+
+    console.log(data.token);
+  });
+}
+
 function authenticate(credentials) {
   const qs = require('qs');
 
@@ -41,5 +56,6 @@ export default {
   authenticate,
   getToken,
   setToken,
-  clear
+  clear,
+  oauth
 }
