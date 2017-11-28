@@ -50,7 +50,6 @@
 </section>
 
 <script>
-  import auth from '../../services/auth';
   import itineraryService from '../../services/itinerary';
   import Itinerary from '../Itinerary/Itinerary.html';
 
@@ -59,15 +58,14 @@
       itineraryService.getItinerary()
         .then((response) => {
           if(response.status !== 200) {
-            alert('there was an error');
             return;
           }
 
           response.json().then((itinerary) => {
-            this.set({ itinerary: itinerary });
+            this.set({ itinerary });
           });
 
-        }).catch(function(err) {
+        }).catch((err) => {
         console.log('Fetch Error :-S', err);
       });
     },

@@ -1,5 +1,6 @@
-const { readFileSync } = require('fs');
-const webpack = require('webpack');
+const { readFileSync } = require("fs");
+const webpack = require("webpack");
+const path = require("path");
 
 const treeShakenMinifyer = new webpack.LoaderOptionsPlugin({
   minimize: true,
@@ -7,15 +8,21 @@ const treeShakenMinifyer = new webpack.LoaderOptionsPlugin({
 });
 
 const extractSharedLibraries = new webpack.optimize.CommonsChunkPlugin({
-  name: 'vendor',
-  filename: 'vendor.js'
+  name: "vendor",
+  filename: "vendor.js"
 });
 
-const babelSettings = JSON.parse(readFileSync('.babelrc'));
+const babelSettings = JSON.parse(readFileSync(".babelrc"));
 
 module.exports = {
   entry: {
-    'index': [ './src/index.js' ]
+    "index": [ "./src/index.js" ]
+  },
+  devtool: "cheap-eval-source-map",
+  output: {
+    path: __dirname + "/public",
+    filename: "[name].js",
+    chunkFilename: "[name].[id].js"
   },
   plugins: [
     extractSharedLibraries,
@@ -23,33 +30,38 @@ module.exports = {
     new webpack.NamedModulesPlugin()
   ],
   resolve: {
-    extensions: [ '.js', '.html' ]
+    extensions: [ ".js", ".html" ]
   },
-  output: {
-    path: __dirname + '/public',
-    filename: '[name].js',
-    chunkFilename: '[name].[id].js'
+  stats: {
+    colors: true,
+    reasons: true,
+    chunks: true
   },
   module: {
     rules: [
       {
+        enforce: "pre",
+        test: /\.(html|js)$/,
+        loader: "eslint-loader",
+        exclude: /node_modules/
+      },
+      {
         test: /\.(html|js)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           query: babelSettings
         }
       },
       {
         test: /\.html$/,
         exclude: /node_modules/,
-        use: 'svelte-loader'
+        use: "svelte-loader"
       },
       {
         test: /\.css$/,
         use: [ 'style-loader', 'css-loader' ]
       }
     ]
-  },
-  devtool: 'inline-source-map'
+  }
 };

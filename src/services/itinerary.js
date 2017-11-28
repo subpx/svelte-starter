@@ -1,7 +1,7 @@
-import { config } from '../config/config';
+import config from '../config/config';
 import auth from './auth';
 
-let itinerary = null;
+const service = {};
 
 function getItinerary() {
   const headers = new Headers();
@@ -11,18 +11,23 @@ function getItinerary() {
   const init = {
     credentials: 'include',
     method: 'get',
-    headers: headers,
-    mode: 'cors'
+    mode: 'cors',
+    headers
   };
 
-  return fetch(`${config.API_URL}/api/Itinerary/8d353cbf-8025-410a-8a5b-49622cf98fee/Passenger/ab913276-0235-41ae-b5d9-ff2e00c1c392`, init);
+  return fetch(
+    `${
+      config.API_URL
+    }/api/Itinerary/8d353cbf-8025-410a-8a5b-49622cf98fee/Passenger/ab913276-0235-41ae-b5d9-ff2e00c1c392`,
+    init
+  );
 }
 
 function setItinerary(data) {
-  itinerary = data;
+  service.itinerary = data;
 }
 
 export default {
   getItinerary,
   setItinerary
-}
+};

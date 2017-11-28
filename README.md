@@ -2,12 +2,14 @@
 
 Svelte starter POC with router, nested routes, route change hooks, private routes, authentication and http using fetch api.
 
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+
 ### Development
 Requires Node.js 8.4.0+ 
 
 ```bash
 npm i
-npm run serve
+npm run dev
 ```
 
 

@@ -1,4 +1,5 @@
-import { config } from '../config/config';
+import qs from 'qs';
+import config from '../config/config';
 
 function clear() {
   return localStorage.removeItem('access_token');
@@ -12,24 +13,7 @@ function setToken(token) {
   return localStorage.setItem('access_token', token);
 }
 
-function oauth() {
-  const authenticator = new netlify.default ({});
-
-  authenticator.authenticate({
-    provider: 'github',
-    scope: 'user'
-  }, function(err, data) {
-    if (err) {
-      console.log(err);
-    }
-
-    console.log(data.token);
-  });
-}
-
 function authenticate(credentials) {
-  const qs = require('qs');
-
   const data = {
     client_id: config.CLIENT_ID,
     client_secret: config.CLIENT_SECRET,
@@ -44,9 +28,9 @@ function authenticate(credentials) {
   const init = {
     credentials: 'include',
     method: 'post',
-    headers: headers,
     mode: 'cors',
-    body: qs.stringify(data)
+    body: qs.stringify(data),
+    headers
   };
 
   return fetch(`${config.API_URL}/token`, init);
@@ -56,6 +40,5 @@ export default {
   authenticate,
   getToken,
   setToken,
-  clear,
-  oauth
-}
+  clear
+};

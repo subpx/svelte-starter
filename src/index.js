@@ -9,7 +9,7 @@ stateRouter.addState({
   name: 'login',
   route: '/login',
   template: Login,
-  resolve: function(data, parameters, callback) {
+  resolve(data, parameters, callback) {
     auth.clear();
     callback();
   },
@@ -18,15 +18,15 @@ stateRouter.addState({
 stateRouter.addState({
   name: 'contact',
   route: '/contact',
-  template: Contact
+  template: Contact,
 });
 
 stateRouter.addState({
   name: 'dashboard',
   route: '/dashboard',
   template: Dashboard,
-  resolve: function(data, parameters, callback) {
-    if(auth.getToken()) {
+  resolve(data, parameters, callback) {
+    if (auth.getToken()) {
       callback();
     } else {
       callback.redirect('login');
@@ -37,23 +37,23 @@ stateRouter.addState({
 stateRouter.addState({
   name: 'dashboard.nested',
   route: '/nested',
-  template: Nothing
+  template: Nothing,
 });
 
-stateRouter.on('routeNotFound', function(route, parameters) {
-  console.log(route + ' routeNotFound');
+stateRouter.on('routeNotFound', (route, parameters) => {
+  console.log('routeNotFound', route, parameters);
 });
 
-stateRouter.on('stateChangeStart', function(route, parameters) {
+stateRouter.on('stateChangeStart', (route, parameters) => {
   console.log('stateChangeStart', route, parameters);
 });
 
-stateRouter.on('stateChangeEnd', function(route, parameters) {
+stateRouter.on('stateChangeEnd', (route, parameters) => {
   console.log('stateChangeEnd', route, parameters);
 });
 
-stateRouter.on('stateError', function(route, parameters) {
-  console.log(route + ' stateError');
+stateRouter.on('stateError', (route, parameters) => {
+  console.log('stateError', route, parameters);
 });
 
 stateRouter.evaluateCurrentRoute('login');
