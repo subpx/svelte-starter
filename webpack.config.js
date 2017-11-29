@@ -1,6 +1,7 @@
 const { readFileSync } = require("fs");
 const webpack = require("webpack");
 const path = require("path");
+const styleLintPlugin = require("stylelint-webpack-plugin");
 
 const treeShakenMinifyer = new webpack.LoaderOptionsPlugin({
   minimize: true,
@@ -27,7 +28,14 @@ module.exports = {
   plugins: [
     extractSharedLibraries,
     treeShakenMinifyer,
-    new webpack.NamedModulesPlugin()
+    new webpack.NamedModulesPlugin(),
+    new styleLintPlugin({
+      configFile: '.stylelintrc',
+      context: 'src',
+      files: '**/*.html',
+      failOnError: false,
+      quiet: false
+    })
   ],
   resolve: {
     extensions: [ ".js", ".html" ]
