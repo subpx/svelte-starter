@@ -1,0 +1,146 @@
+<div>
+  <h1>Draggable/sortable grid using Shopify's Draggable</h1>
+
+  <div id="grid">
+    <div class="item">
+      <div class="item-content">
+        1
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-content">
+2
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-content item-tall">
+3
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-content">
+4
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-content">
+5
+      </div>
+    </div>
+
+    <div class="item item-tall">
+      <div class="item-content">
+6
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-content">
+7
+      </div>
+    </div>
+
+    <div class="item item-wide">
+      <div class="item-content">
+8
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-content">
+9
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-content">
+10
+      </div>
+    </div>
+
+    <div class="item item-wide">
+      <div class="item-content">
+11
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-content">
+12
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<style>
+  #grid {
+    background-color: black;
+    padding: 20px;
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+  }
+
+  .item {
+    background-color: white;
+    color: black;
+    float: left;
+    font-size: 100px;
+    display: block;
+    width: 590px;
+    height: 300px;
+    margin: 5px;
+    z-index: 1;
+  }
+
+  .item.item-wide {
+    width: 1190px;
+  }
+
+  .item.item-tall {
+    height: 510px;
+  }
+
+  .item.muuri-item-positioning {
+    background: blue;
+  }
+
+  .item.muuri-item-dragging {
+    background: yellow;
+    z-index: 3;
+    opacity: 0.5;
+  }
+
+  .item.muuri-item-releasing {
+    background: red;
+    z-index: 2;
+  }
+
+  .item.muuri-item-hidden {
+    z-index: 0;
+  }
+
+  .item-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<script>
+  import Sortable from '@shopify/draggable/lib/sortable';
+
+  export default {
+    oncreate() {
+      this.grid = new Sortable(document.getElementById('grid'), {
+        draggable: 'div',
+      });
+    }
+  };
+</script>

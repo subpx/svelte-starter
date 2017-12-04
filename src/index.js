@@ -2,7 +2,9 @@ import stateRouter from './services/router';
 import auth from './services/auth';
 import Dashboard from './components/Dashboard/Dashboard.html';
 import Login from './components/Login/Login.html';
-import Contact from './components/Contact/Contact.html';
+import Grid from './components/Grid/Grid.html';
+import Draggable from './components/Draggable/Draggable.html';
+import Sortable from './components/Sortable/Sortable.html';
 import Nothing from './components/Dashboard/Nothing.html';
 
 stateRouter.addState({
@@ -16,9 +18,21 @@ stateRouter.addState({
 });
 
 stateRouter.addState({
-  name: 'contact',
-  route: '/contact',
-  template: Contact,
+  name: 'grid',
+  route: '/grid',
+  template: Grid
+});
+
+stateRouter.addState({
+  name: 'sortable',
+  route: '/sortable',
+  template: Sortable
+});
+
+stateRouter.addState({
+  name: 'draggable',
+  route: '/draggable',
+  template: Draggable
 });
 
 stateRouter.addState({
@@ -37,7 +51,7 @@ stateRouter.addState({
 stateRouter.addState({
   name: 'dashboard.nested',
   route: '/nested',
-  template: Nothing,
+  template: Nothing
 });
 
 stateRouter.on('routeNotFound', (route, parameters) => {
