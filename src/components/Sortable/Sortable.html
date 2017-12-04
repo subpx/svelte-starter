@@ -121,38 +121,39 @@
         handle: '.item_handle',
         animation: 150,
         setData(dataTransfer, dragEl) {
-          console.log('setData', dataTransfer, dragEl);
+          //console.log('setData', dataTransfer, dragEl);
         },
         onChoose(evt) {
-          console.log('onChoose', evt);
+          //console.log('onChoose', evt);
         },
         onStart(evt) {
-          console.log('onStart', evt);
+          //console.log('onStart', evt);
         },
         onEnd(evt) {
-          console.log('onEnd', evt);
+          //console.log('onEnd', evt);
         },
         onAdd(evt) {
-          console.log('onAdd', evt);
+          //console.log('onAdd', evt);
         },
         onUpdate(evt) {
-          console.log('onUpdate', evt);
+          //console.log('onUpdate', evt);
         },
         onSort(evt) {
-          console.log('onSort', evt);
+          //console.log('onSort', evt);
         },
         onRemove(evt) {
-          console.log('onRemove', evt);
+          //console.log('onRemove', evt);
         },
         onFilter(evt) {
-          console.log('onFilter', evt);
+          //console.log('onFilter', evt);
         },
         onMove(evt, originalEvent) {
-          console.log('onMove', evt, originalEvent);
-          evt.preventDefault();
+          if(evt.willInsertAfter === undefined) {
+            return false;
+          }
         },
         onClone(evt) {
-          console.log('onClone', evt);
+          //console.log('onClone', evt);
         }
       });
     }
