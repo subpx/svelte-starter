@@ -4,44 +4,38 @@
   <div id="grid" class="grid">
     <div class="item">
       <div class="item_handle"></div>
-      <span>1</span>
-      <img src="/img/bear.jpg"/>
+      <div class="item_sm" title="Minimise" on:click="minimise(event)"></div>
+      <div class="item_lg" title="Maximise" on:click="maximise(event)"></div>
     </div>
 
     <div class="item">
       <div class="item_handle"></div>
-      <span>2</span>
-      <img src="/img/chain.jpg"/>
+      <div class="item_sm" title="Minimise" on:click="minimise(event)"></div>
+      <div class="item_lg" title="Maximise" on:click="maximise(event)"></div>
     </div>
 
     <div class="item">
       <div class="item_handle"></div>
-      <span>3</span>
-      <img src="/img/chain.jpg"/>
-    </div>
-
-    <div class="item item-wide">
-      <div class="item_handle"></div>
-      <span>4</span>
-      <img src="/img/sky.png"/>
+      <div class="item_sm" title="Minimise" on:click="minimise(event)"></div>
+      <div class="item_lg" title="Maximise" on:click="maximise(event)"></div>
     </div>
 
     <div class="item">
       <div class="item_handle"></div>
-      <span>5</span>
-      <img src="/img/chain.jpg"/>
+      <div class="item_sm" title="Minimise" on:click="minimise(event)"></div>
+      <div class="item_lg" title="Maximise" on:click="maximise(event)"></div>
     </div>
 
     <div class="item">
       <div class="item_handle"></div>
-      <span>6</span>
-      <img src="/img/chain.jpg"/>
+      <div class="item_sm" title="Minimise" on:click="minimise(event)"></div>
+      <div class="item_lg" title="Maximise" on:click="maximise(event)"></div>
     </div>
 
     <div class="item">
       <div class="item_handle"></div>
-      <span>7</span>
-      <img src="/img/sky.png"/>
+      <div class="item_sm" title="Minimise" on:click="minimise(event)"></div>
+      <div class="item_lg" title="Maximise" on:click="maximise(event)"></div>
     </div>
   </div>
 </div>
@@ -50,7 +44,9 @@
 <style>
   .grid {
     background: black;
-    width: 1200px;
+    padding: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   .grid::after {
@@ -60,15 +56,19 @@
   }
 
   .item {
-    background: blue;
-    color: white;
+    background: darkslategray;
     float: left;
-    font-size: 50px;
-    width: 580px;
-    height: 300px;
     overflow: hidden;
     position: relative;
     margin: 10px;
+    width: 570px;
+    height: 300px;
+    transition: all 0.3s ease-out;
+  }
+
+  .item-full {
+    width: 1160px;
+    height: 450px;
   }
 
   .sortable-ghost {
@@ -80,35 +80,48 @@
     visibility: hidden;
   }
 
-  .item-wide {
-    width: 1180px;
-  }
-
   .item img {
-    width: 100%;
-    height: 100%;
+    display: block;
     position: relative;
     z-index: 0;
-  }
-
-  .item span {
-    color: white;
     width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 1;
   }
 
   .item_handle {
-    background: yellow;
+    background: white;
+    opacity: 0.3;
     height: 20px;
+    width: 100px;
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 10px;
+    left: 10px;
     z-index: 2;
     cursor: move;
     cursor: -webkit-grabbing;
+  }
+
+  .item_sm {
+    background: black;
+    opacity: 0.3;
+    height: 20px;
+    width: 25px;
+    position: absolute;
+    top: 10px;
+    right: 70px;
+    z-index: 2;
+    cursor: pointer;
+  }
+
+  .item_lg {
+    background: black;
+    opacity: 0.3;
+    height: 20px;
+    width: 50px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+    cursor: pointer;
   }
 </style>
 
@@ -119,6 +132,7 @@
     oncreate() {
       this.grid = Sortable.create(document.getElementById('grid'), {
         handle: '.item_handle',
+        fallbackTolerance: 50,
         animation: 150,
         setData(dataTransfer, dragEl) {
           //console.log('setData', dataTransfer, dragEl);
@@ -156,6 +170,16 @@
           //console.log('onClone', evt);
         }
       });
+    },
+    methods: {
+      minimise(event) {
+        const widget = event.target.parentElement;
+        widget.classList.remove('item-full');
+      },
+      maximise(event) {
+        const widget = event.target.parentElement;
+        widget.classList.add('item-full');
+      }
     }
   };
 </script>
