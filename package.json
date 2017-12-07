@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "npm run dev",
     "dev": "webpack-dev-server --content-base public/ --config webpack.config.js --open",
     "build": "webpack --config webpack.config.build.js --display-error-details",
     "format": "prettier --write --single-quote --print-width=120 --parser=flow --tab-width=2 \"src/**/*.js\"",
@@ -44,6 +45,7 @@
     "abstract-state-router": "^6.0.3",
     "flatpickr": "^4.1.2",
     "hammerjs": "^2.0.8",
+    "lodash": "^4.17.4",
     "moment": "^2.19.2",
     "muuri": "^0.5.1",
     "qs": "^6.5.1",
@@ -51,6 +53,7 @@
     "redux-store": "0.0.0",
     "sortablejs": "^1.7.0",
     "svelte": "^1.24.0",
-    "svelte-state-renderer": "^1.2.5"
+    "svelte-state-renderer": "^1.2.5",
+    "validate-js": "^2.0.1"
   }
 }

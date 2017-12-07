@@ -1,0 +1,92 @@
+<div class="formWrapper">
+  <div class="formArea">
+    <form role="form" name="form" novalidate>
+      <h3>Contact Form</h3>
+
+      {{#if formErrors.length}}
+        <div id="error" class="alert alert-danger" role="alert">
+          <h3>Oops!</h3>
+          <ul>
+            {{#each formErrors as error}}
+            <li>{{error.message}}</li>
+            {{/each}}
+          </ul>
+        </div>
+      {{/if}}
+
+      <div class="form-group">
+        <input type="text" class="form-control {{hasError(formErrors, 'username') ? 'form-control-error' : ''}}"
+               id="username"
+               name="username"
+               placeholder="Username">
+        {{#if hasError(formErrors, 'username')}}
+        <div>
+          <small>Please provide a valid username.</small>
+        </div>
+        {{/if}}
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" id="email" name="email" placeholder="Email address">
+      </div>
+
+      <div class="text-right">
+        <button type="submit" name="submit" class="btn btn-primary">Submit Form</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  .formWrapper {
+    max-width: 800px;
+    margin: 40px auto 0 auto;
+  }
+
+  .formArea {
+    background: white;
+    padding: 20px;
+  }
+
+  .form-control-error {
+    border-color: red;
+  }
+</style>
+
+<script>
+  import FormValidator from 'validate-js';
+  import find from 'lodash/find';
+
+  function hasError(errors, id) {
+    return find(errors, (error) => {
+      return error.id === id;
+    });
+  }
+
+  export default {
+    data () {
+      return {
+        formErrors: []
+      };
+    },
+    oncreate() {
+      this.validator = new FormValidator('form', [
+        {
+          name: 'username',
+          display: 'username',
+          rules: 'required|min_length[8]'
+        },
+        {
+          name: 'email',
+          display: 'Email',
+          rules: 'required|valid_email'
+        }
+      ], (errors) => {
+        this.set({ formErrors: errors });
+      });
+    },
+    helpers: {
+      hasError
+    },
+  };
+</script>

@@ -6,6 +6,7 @@ import Grid from './components/Grid/Grid.html';
 import Draggable from './components/Draggable/Draggable.html';
 import Sortable from './components/Sortable/Sortable.html';
 import Nothing from './components/Dashboard/Nothing.html';
+import Form from './components/Form/Form.html';
 
 stateRouter.addState({
   name: 'login',
@@ -33,6 +34,12 @@ stateRouter.addState({
   name: 'draggable',
   route: '/draggable',
   template: Draggable
+});
+
+stateRouter.addState({
+  name: 'form',
+  route: '/form',
+  template: Form
 });
 
 stateRouter.addState({
