@@ -3,6 +3,9 @@
     "airbnb-base",
     "prettier"
   ],
+  "rules": {
+    "consistent-return": ["warn"]
+  },
   "plugins": [
     "prettier",
     "html"
