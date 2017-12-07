@@ -58,9 +58,7 @@
   import find from 'lodash/find';
 
   function hasError(errors, id) {
-    return find(errors, (error) => {
-      return error.id === id;
-    });
+    return find(errors, (error) => error.id === id);
   }
 
   export default {
